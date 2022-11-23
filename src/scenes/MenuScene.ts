@@ -1,11 +1,11 @@
 import gsap from "gsap";
-import { Scene } from "pixi-scenes";
 import { Text, TextStyle } from "pixi.js";
+import { Scene } from "pixi-scenes";
 
 export default class MenuScene extends Scene {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    private header: Text;
+    private header: Text; // Название
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     private keyToStart: Text;
@@ -22,7 +22,7 @@ export default class MenuScene extends Scene {
         this.header = new Text("SnakeIt", headerStyle);
         this.header.x = this.app.screen.width / 2;
         this.header.y = this.app.screen.height / 2;
-        this.header.anchor.set(0.5);
+        this.header.anchor.set(0.5); // Центровка
 
         const keyToStartStyle = new TextStyle({
             fontFamily: "PressStart2P",
@@ -34,18 +34,18 @@ export default class MenuScene extends Scene {
         this.keyToStart.angle = -1.2;
         this.keyToStart.anchor.set(0.5);
 
-        gsap.to(this.keyToStart, { alpha: 0.5, angle: 2.4, yoyo: true, repeat: -1 });
+        gsap.to(this.keyToStart, { alpha: 0.5, angle: 2.4, yoyo: true, repeat: -1 }); // анимация текста
+
         this.addChild(this.header);
         this.addChild(this.keyToStart);
     }
 
     public start(): void {
-        this.keydownHandler = (e) => this.onkeydownHandler(e);
+        this.keydownHandler = (e) => this.onkeydownHandler(e); // реакция на воздейсвтие
         window.addEventListener("keydown", this.keydownHandler, false);
     }
 
     private onkeydownHandler(e: KeyboardEvent) {
-        console.log(e, this);
         this.scenes?.start("game");
     }
 

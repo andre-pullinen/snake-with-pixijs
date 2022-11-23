@@ -1,6 +1,6 @@
-import { Graphics } from "pixi.js";
 import gsap from "gsap";
 import _ from "lodash";
+import { Graphics } from "pixi.js";
 
 export class Food extends Graphics {
     private readonly _color: FoodColor;
@@ -11,27 +11,24 @@ export class Food extends Graphics {
         this._size = size;
         this._color = color;
         this._radius = 1.1 * size;
-        gsap.to(this, { pixi: { scale: 1.05 }, yoyo: true, repeat: -1 });
+        gsap.to(this, { pixi: { scale: 1.05 }, yoyo: true, repeat: -1 }); // анимация пульсации
         //gsap.ticker.add(this.animateSpawn);
-        this.reDraw();
+        this.draw();
     }
 
-    private reDraw() {
+    private draw() {
         this.clear();
         this.beginFill(this._color);
-        this.drawCircle(30, 30, this._radius);
+        this.drawCircle(0, 0, this._radius);
         this.endFill();
     }
 
     private animateSpawn() {
-        // line below shows the problem
+        // анимация пояление еды, не законченно
         if (this._radius < 1.1 * this._size) {
             console.log(this._radius);
         }
         //gsap.to(this, { _radius: 100 });
-    }
-    private animateStay() {
-        //gsap.to(this, pixi: { scale: 0.5, yoyo: true, repeat: -1 });
     }
 }
 
@@ -52,5 +49,6 @@ function getRandomValueFromEnum<E>(enumeration: { [s: string]: E } | ArrayLike<E
 }
 
 export function getRandomFood(): Food {
+    // сосдание рандомной еды
     return new Food(getRandomInt(15, 30), getRandomValueFromEnum(FoodColor) as FoodColor);
 }

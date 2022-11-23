@@ -1,22 +1,21 @@
+import "./style.css";
+import "@pixi/math-extras";
+
+import { gsap } from "gsap";
+import { PixiPlugin } from "gsap/PixiPlugin";
 import * as PIXI from "pixi.js";
-import { Application, Loader, Texture, AnimatedSprite } from "pixi.js";
+import { AnimatedSprite, Application, Loader, Texture } from "pixi.js";
 import { SceneManager } from "pixi-scenes";
 import { WebfontLoaderPlugin } from "pixi-webfont-loader";
-import "./style.css";
-import { gsap } from "gsap";
-import MenuScene from "./scenes/MenuScene";
-import GameScene from "./scenes/GameScene";
-declare const VERSION: string;
-import "@pixi/math-extras";
-import { PixiPlugin } from "gsap/PixiPlugin";
+
+import GameScene from "./scenes/GameScene"; // Игровая сцена
+import MenuScene from "./scenes/MenuScene"; // Главная сцена
 
 const gameWidth = window.innerWidth;
 const gameHeight = window.innerHeight;
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
-
-console.log(`Welcome from pixi-typescript-boilerplate ${VERSION}`);
 
 const app = new Application({
     backgroundColor: 0xd3d3d3,

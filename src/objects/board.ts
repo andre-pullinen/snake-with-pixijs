@@ -4,7 +4,7 @@ export class Board extends Container {
         return this._foodLayer;
     }
     private _app: Application;
-    private _foodLayer: Container;
+    private readonly _foodLayer: Container;
     constructor(app: Application) {
         super();
         this._app = app;
@@ -13,13 +13,13 @@ export class Board extends Container {
     }
 
     private init() {
-        // region print #
+        // Сама сетка доски
         this.x = 0;
         this.y = 0;
-        this.width = 10000;
+        this.width = 10000; // размер поля
         this.height = 10000;
         const g = new Graphics();
-        const maxI = 10000 / 200;
+        const maxI = 10000 / 200; // размер клетки, те интервал линий
         g.lineStyle(2, 0xffc2c2);
         for (let i = 0; i < maxI; i++) {
             g.moveTo(i * 200, 0);
@@ -28,8 +28,7 @@ export class Board extends Container {
             g.lineTo(10000, i * 200);
         }
         this.addChild(g);
-        //end region
-        this.addChild(this._foodLayer);
+        this.addChild(this._foodLayer); // отдельный слой еды
     }
 
     getFoodInRadius(): number {
